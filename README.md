@@ -30,4 +30,4 @@ To add...
 
 ## Project status
 
-Completed 1/8 stages
+Completed 2/8 stages
