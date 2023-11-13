@@ -28,6 +28,11 @@ To add...
 - Added new fields to store state of each natural number, whether it's odd/even/buzz/duck
 - Instead of all the print statements, there is one method which prints all the necessary info regarding the number object.
 
+13.11.2023
+- Rework a bit the user input
+- Added main program loop, program exits if user inputs `0`
+- Added new method for checking if number is a palindrom
+
 ## Project status
 
-Completed 2/8 stages
+Completed 3/8 stages
