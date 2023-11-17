@@ -1,56 +1,44 @@
 package numbers;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 class Number {
 
-    private boolean isOdd;
-    private boolean isEven;
-    private boolean isBuzz;
-    private boolean isDuck;
+    private boolean odd;
+    private boolean even;
+    private boolean buzz;
+    private boolean duck;
+    private boolean palindrome;
+    private boolean gapful;
 
-    private boolean isPalindromic;
+    private final long firstNumber;
 
-    private long number;
-
-    Number() {
-        this.reset();
+    Number(long firstNumber) {
+        this.firstNumber = firstNumber;
     }
 
-    private void reset() {
-        this.isOdd = false;
-        this.isEven = false;
-        this.isBuzz = false;
-        this.isDuck = false;
-        this.isPalindromic = false;
-    }
+    public void printDiff() {
+        StringBuilder str = new StringBuilder();
+        String message = String.format("%s is", this.firstNumber);
+        str.append(message);
 
-    public void start() {
-        System.out.println("Welcome to Amazing Numbers!\n");
-        System.out.println("""
-                Supported requests:
-                - enter a natural number to know its properties;
-                - enter 0 to exit.
-                """);
-        while (true) {
-            this.reset();
-            try {
-                this.number = getInt();
-                System.out.println();
-            } catch (Exception e) {
-                continue;
-            }
-            if (this.number == 0) {
-                System.out.println("Goodbye!");
-                break;
-            }
-            checkOddEven(number);
-            checkIfBuzz(number);
-            checkDuck(number);
-            checkPalindrom(number);
-            System.out.println(this);
+        if (even) {
+            str.append(" even");
         }
+        if (odd) {
+            str.append(" odd");
+        }
+        if (buzz) {
+            str.append(" buzz");
+        }
+        if (duck) {
+            str.append(" duck");
+        }
+        if (gapful) {
+            str.append(" gapful");
+        }
+        if (palindrome) {
+            str.append(" palindromic");
+        }
+        System.out.println(str);
     }
 
     @Override
@@ -62,20 +50,45 @@ class Number {
                         buzz: %b
                         duck: %b
                         palindromic: %b
+                        gapful: %b
                 """,
-                this.number,
-                this.isEven,
-                this.isOdd,
-                this.isBuzz,
-                this.isDuck,
-                this.isPalindromic
+                this.firstNumber,
+                this.even,
+                this.odd,
+                this.buzz,
+                this.duck,
+                this.palindrome,
+                this.gapful
                 );
     }
 
-    private void checkDuck(long number) {
+    private void checkGapful() {
+        String toNum = String.valueOf(firstNumber);
+
+        int numLength = toNum.length();
+        if (toNum.length() < 3) {
+            this.gapful = false;
+            return;
+        }
+        int firstDigit = Integer.parseInt(String.valueOf(toNum.charAt(0)));
+        int lastDigit = Integer.parseInt(String.valueOf(toNum.charAt(numLength - 1)));;
+
+        int divisor = firstDigit * 10 + lastDigit;
+
+        if (firstNumber % divisor == 0) {
+            this.gapful = true;
+            return;
+        }
+
+        this.gapful = false;
+
+    }
+
+    private void checkDuck() {
+        long number = firstNumber;
         while (number > 0) {
             if (number % 10 == 0) {
-                this.isDuck = true;
+                this.duck = true;
                 return;
             }
             number /= 10;
@@ -83,73 +96,43 @@ class Number {
     }
 
 
-    private void checkPalindrom(long number) {
-//        StringBuilder palindrom = new StringBuilder();
-//        String strNum = String.valueOf(number);
-//        for (int i = strNum.length(); i > 0; i--) {
-//            strNum.append()
-//        }
-        String strNum = String.valueOf(number);
+    private void checkPalindrome() {
+        String strNum = String.valueOf(firstNumber);
         int last = strNum.length() - 1;
         for (int i = 0; i <= strNum.length() / 2; i++) {
             if (strNum.charAt(i) != strNum.charAt(last--)) {
                 return;
             }
         }
-        this.isPalindromic = true;
+        this.palindrome = true;
     }
 
-    private void validateInt(long number) throws Exception {
-        if (number < 0) {
-            System.out.println();
-            System.out.println("The first parameter should be a natural number or zero.\n");
-            throw new Exception();
-        }
-    }
 
-    private long getInt() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a request: ");
-        long number;
-        try {
-            number = scanner.nextLong();
-        } catch (InputMismatchException e) {
-            System.out.println("Please input a number.");
-            throw new InputMismatchException();
-        }
-        validateInt(number);
-        return number;
-    }
-
-    private void checkOddEven(long number) {
-        if (number % 2 == 0) {
-//            System.out.println("The number is Even.");
-            isEven = true;
+    private void checkOddEven() {
+        if (firstNumber % 2 == 0) {
+            even = true;
         } else {
-//            System.out.println("The number is Odd.");
-            isOdd = true;
+            odd = true;
         }
     }
-    private void checkIfBuzz(long number) {
-//        String message;
-        if (number % 7 == 0 && number % 10 == 7) {
-//            System.out.println("It is a Buzz number.");
-//            message = String.format("%d number is divisible by 7 and ends with 7.", number);
-            isBuzz = true;
+    private void checkIfBuzz() {
+        if (firstNumber % 7 == 0 && firstNumber % 10 == 7) {
+            buzz = true;
         }
-        else if (number % 7 == 0) {
-//            System.out.println("It is a Buzz number.");
-//            message = String.format("%d is divisible by 7.", number);
-            isBuzz = true;
-        } else if (number % 10 == 7) {
-//            System.out.println("It is a Buzz number.");
-//            message = String.format("%d ends with 7.", number);
-            isBuzz = true;
+        else if (firstNumber % 7 == 0) {
+            buzz = true;
+        } else if (firstNumber % 10 == 7) {
+            buzz = true;
         } else {
-//            System.out.println("It is not a Buzz number.");
-//            message = String.format("%d is neither divisible by 7 nor does it end with 7", number);
+            buzz = false;
         }
-//        System.out.println("Explanation:");
-//        System.out.println(message);
+    }
+
+    public void makeChecks() {
+        checkOddEven();
+        checkIfBuzz();
+        checkDuck();
+        checkPalindrome();
+        checkGapful();
     }
 }

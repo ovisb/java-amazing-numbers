@@ -21,18 +21,26 @@ To add...
 - Calculate whether number is `odd` or `even` and print message
 - Check also if number is a `Buzz` number
 - Print explanations regarding number being `Buzz`
+- Completed stage 1
 
 13.11.2023
 - Add a new method which checks if number is a `Duck`
 - A `Duck` number is any number which contains a `0` (zero)
-- Added new fields to store state of each natural number, whether it's odd/even/buzz/duck
+- Added new fields to store state of each natural number, whether it's `odd/even/buzz/duck`
 - Instead of all the print statements, there is one method which prints all the necessary info regarding the number object.
+- Completed stage 2
 
 13.11.2023
 - Rework a bit the user input
 - Added main program loop, program exits if user inputs `0`
-- Added new method for checking if number is a palindrom
+- Added new method for checking if number is a `palindrome`
+- Completed stage 3
+
+17.11.2023
+- Had to refactor majority of the code to be more object oriented as my initial solution was not progressing well the future stages
+- Split functionality into different classes
+- Added new method for checking if number is `Gapful`
 
 ## Project status
 
-Completed 3/8 stages
+Completed 4/8 stages
