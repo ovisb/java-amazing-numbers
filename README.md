@@ -40,7 +40,13 @@ To add...
 - Had to refactor majority of the code to be more object oriented as my initial solution was not progressing well the future stages
 - Split functionality into different classes
 - Added new method for checking if number is `Gapful`
+- Completed stage 4
 
+23.11.2023
+- Adding new method for checking if number is `Spy`
+- Now, in the input you can pass any property, e.g `9 3 odd` will check and return 3 numbers which are `ODD` starting from the number 9
+- Added error handling to inform user on incorrect property
+- Completed stage 5
 ## Project status
 
-Completed 4/8 stages
+Completed 5/8 stages

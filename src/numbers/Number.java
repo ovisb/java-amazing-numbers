@@ -9,10 +9,40 @@ class Number {
     private boolean palindrome;
     private boolean gapful;
 
+    private boolean spy;
+
     private final long firstNumber;
 
     Number(long firstNumber) {
         this.firstNumber = firstNumber;
+    }
+
+    public boolean isEven() {
+        return even;
+    }
+
+    public boolean isOdd() {
+        return odd;
+    }
+
+    public boolean isBuzz() {
+        return buzz;
+    }
+
+    public boolean isDuck() {
+        return duck;
+    }
+
+    public boolean isGapful() {
+        return gapful;
+    }
+
+    public boolean isPalindrome() {
+        return palindrome;
+    }
+
+    public boolean isSpy() {
+        return spy;
     }
 
     public void printDiff() {
@@ -38,6 +68,9 @@ class Number {
         if (palindrome) {
             str.append(" palindromic");
         }
+        if (spy) {
+            str.append(" spy");
+        }
         System.out.println(str);
     }
 
@@ -51,6 +84,7 @@ class Number {
                         duck: %b
                         palindromic: %b
                         gapful: %b
+                        spy: %b
                 """,
                 this.firstNumber,
                 this.even,
@@ -58,8 +92,24 @@ class Number {
                 this.buzz,
                 this.duck,
                 this.palindrome,
-                this.gapful
+                this.gapful,
+                this.spy
                 );
+    }
+
+    private void checkSpy() {
+        String toNum = String.valueOf(firstNumber);
+
+        int sum = 0;
+        int prod = 1;
+        for (int i = 0; i < toNum.length(); i++) {
+            sum += Character.getNumericValue(toNum.charAt(i));
+            prod *= Character.getNumericValue(toNum.charAt(i));
+        }
+
+        if (sum == prod) {
+            this.spy = true;
+        }
     }
 
     private void checkGapful() {
@@ -70,8 +120,8 @@ class Number {
             this.gapful = false;
             return;
         }
-        int firstDigit = Integer.parseInt(String.valueOf(toNum.charAt(0)));
-        int lastDigit = Integer.parseInt(String.valueOf(toNum.charAt(numLength - 1)));;
+        int firstDigit = Character.getNumericValue(toNum.charAt(0));
+        int lastDigit = Character.getNumericValue(toNum.charAt(numLength - 1));
 
         int divisor = firstDigit * 10 + lastDigit;
 
@@ -134,5 +184,6 @@ class Number {
         checkDuck();
         checkPalindrome();
         checkGapful();
+        checkSpy();
     }
 }

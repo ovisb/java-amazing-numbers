@@ -11,11 +11,14 @@ class UserInput {
 
     private long secondNumber;
 
+    private ArrayList<String> properties;
+
     private boolean continueLoop = true;
 
 
 
     UserInput() {
+        properties = new ArrayList<>();
         printMenu();
     }
 
@@ -27,23 +30,29 @@ class UserInput {
         return secondNumber;
     }
 
+    public ArrayList<String> getProperties() {
+        return properties;
+    }
+
     public boolean isContinueLoop() {
         return continueLoop;
     }
 
     public void collectInput() {
+        properties = new ArrayList<>();
         while (true) {
             this.request = getInput();
+            System.out.println();
 
             try {
                 Validation.validateInput(this);
             } catch (Exception e) {
+                System.out.println();
                 continue;
             }
 
             firstNumber = Long.parseLong(this.request[0]);
             if (firstNumber == 0) {
-//                System.out.println("Goodbye!");
                 continueLoop = false;
                 return;
             }
@@ -53,50 +62,11 @@ class UserInput {
             } catch (Exception e) {
                 secondNumber = 0;
             }
+
+            addProperties(request);
             return;
         }
-
-//        while (true) {
-//            this.request = getInput();
-//
-//            try {
-//                Validation.validateInput(this);
-//            } catch (Exception e) {
-//                continue;
-//            }
-//
-//            firstNumber = Long.parseLong(this.request[0]);
-//            if (firstNumber == 0) {
-//                System.out.println("Goodbye!");
-//                return;
-//            }
-//
-//           try {
-//                secondNumber = Long.parseLong(this.request[1]);
-//           } catch (Exception e) {
-//               secondNumber = 0;
-//           }
-//
-//           createNumbers(firstNumber, secondNumber);
-//        }
     }
-
-
-//    private void createNumbers(long firstNumber, long secondNumber) {
-//        long maxLoop = secondNumber == 0 ? firstNumber + 1 : firstNumber + secondNumber;
-//
-//        for (long num = firstNumber; num < maxLoop ; num++) {
-//            Number number = new Number(num);
-//            number.makeChecks();
-//
-//            if (secondNumber != 0) {
-//                number.printDiff();
-//            } else {
-//                System.out.println(number);
-//            }
-//        }
-//    }
-
     public String[] getRequest() {
         return request;
     }
@@ -107,6 +77,12 @@ class UserInput {
         return scanner.nextLine().split(" ");
     }
 
+    private void addProperties(String[] request) {
+        for (int i = 2; i < request.length; i++) {
+            properties.add(request[i]);
+        }
+    }
+
     private void printMenu() {
         System.out.println("Welcome to Amazing Numbers!\n");
         System.out.println("""
@@ -114,7 +90,8 @@ class UserInput {
                 - enter a natural number to know its properties;
                 - enter two natural numbers to obtain the properties of the list:
                   * the first parameter represents a starting number;
-                  * the second parameter shows how many consecutive numbers are to be processed;
+                  * the second parameters show how many consecutive numbers are to be processed;
+                - two natural numbers and a property to search for;
                 - separate the parameters with one space;
                 - enter 0 to exit.
                 """);
