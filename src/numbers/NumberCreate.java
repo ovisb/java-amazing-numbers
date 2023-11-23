@@ -8,7 +8,7 @@ class NumberCreate {
     private long firstNumber;
     private long secondNumber;
 
-    private ArrayList<String> properties;
+    private final ArrayList<String> properties;
 
     NumberCreate(long firstNumber, long secondNumber, ArrayList<String> properties) {
         this.firstNumber = firstNumber;
@@ -71,34 +71,4 @@ class NumberCreate {
                 return false;
         }
     }
-
-//    private boolean checkProp(Number number, String prop) {
-//        switch (prop) {
-//            case "odd":
-//                return number.isOdd();
-//            case "even":
-//                return number.isEven();
-//            case "spy":
-//                return number.isSpy();
-//            case "duck":
-//                return number.isDuck();
-//            case "buzz":
-//                if (number.isBuzz()) {
-//                    number.printDiff();
-//                }
-//                break;
-//            case "palindromic":
-//                if (number.isPalindrome()) {
-//                    number.printDiff();
-//                }
-//                break;
-//            case "gapful":
-//                if (number.isGapful()) {
-//                    number.printDiff();
-//                }
-//                break;
-//        }
-//        return false;
-//    }
-
 }

@@ -47,6 +47,13 @@ To add...
 - Now, in the input you can pass any property, e.g `9 3 odd` will check and return 3 numbers which are `ODD` starting from the number 9
 - Added error handling to inform user on incorrect property
 - Completed stage 5
+
+23.11.2023
+- Adding more input validations:
+  - if property inputs have mutual exclusivity, abort the request and warn the user
+  - e.g input `9 3 odd even` will fail as `odd and even` are exclusive properties
+- Now program will warn the user when multiple incorrect properties are being entered.
+
 ## Project status
 
 Completed 5/8 stages
