@@ -15,8 +15,6 @@ class UserInput {
 
     private boolean continueLoop = true;
 
-
-
     UserInput() {
         properties = new ArrayList<>();
         printMenu();
@@ -79,7 +77,7 @@ class UserInput {
 
     private void addProperties(String[] request) {
         for (int i = 2; i < request.length; i++) {
-            properties.add(request[i]);
+            properties.add(request[i].toLowerCase());
         }
     }
 
@@ -87,11 +85,12 @@ class UserInput {
         System.out.println("Welcome to Amazing Numbers!\n");
         System.out.println("""
                 Supported requests:
-                - enter a natural number to know its properties;
+                - enter a natural number to know its properties;\s
                 - enter two natural numbers to obtain the properties of the list:
                   * the first parameter represents a starting number;
-                  * the second parameters show how many consecutive numbers are to be processed;
+                  * the second parameter shows how many consecutive numbers are to be printed;
                 - two natural numbers and a property to search for;
+                - two natural numbers and two properties to search for;
                 - separate the parameters with one space;
                 - enter 0 to exit.
                 """);

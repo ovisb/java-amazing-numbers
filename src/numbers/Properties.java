@@ -7,7 +7,9 @@ enum Properties {
     DUCK("spy"),
     PALINDROMIC(""),
     GAPFUL(""),
-    SPY("duck");
+    SPY("duck"),
+    SUNNY("square"),
+    SQUARE("sunny");
 
     final String exclusivity;
 

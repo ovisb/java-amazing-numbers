@@ -1,5 +1,4 @@
 package numbers;
-
 class Number {
 
     private boolean odd;
@@ -8,12 +7,15 @@ class Number {
     private boolean duck;
     private boolean palindrome;
     private boolean gapful;
-
     private boolean spy;
+    private boolean square;
 
-    private final long firstNumber;
+    private boolean sunny;
+
+    private long firstNumber;
 
     Number(long firstNumber) {
+
         this.firstNumber = firstNumber;
     }
 
@@ -41,9 +43,11 @@ class Number {
         return palindrome;
     }
 
-    public boolean isSpy() {
-        return spy;
-    }
+    public boolean isSpy() {return spy; }
+
+    public boolean isSquare() {return square; }
+
+    public boolean isSunny() {return sunny;}
 
     public void printDiff() {
         StringBuilder str = new StringBuilder();
@@ -71,6 +75,12 @@ class Number {
         if (spy) {
             str.append(" spy");
         }
+        if (square) {
+            str.append(" square");
+        }
+        if (sunny) {
+            str.append(" sunny");
+        }
         System.out.println(str);
     }
 
@@ -85,6 +95,8 @@ class Number {
                         palindromic: %b
                         gapful: %b
                         spy: %b
+                        square: %b
+                        sunny: %b
                 """,
                 this.firstNumber,
                 this.even,
@@ -93,7 +105,9 @@ class Number {
                 this.duck,
                 this.palindrome,
                 this.gapful,
-                this.spy
+                this.spy,
+                this.square,
+                this.sunny
                 );
     }
 
@@ -178,6 +192,22 @@ class Number {
         }
     }
 
+    private boolean checkSqrt(long number) {
+        return Math.sqrt(number) % 1 == 0;
+    }
+
+    private void checkSquare() {
+        if (checkSqrt(this.firstNumber)) {
+            this.square = true;
+        }
+    }
+
+    private void checkSunny() {
+        if (checkSqrt(this.firstNumber + 1)) {
+            sunny = true;
+        }
+    }
+
     public void makeChecks() {
         checkOddEven();
         checkIfBuzz();
@@ -185,5 +215,7 @@ class Number {
         checkPalindrome();
         checkGapful();
         checkSpy();
+        checkSquare();
+        checkSunny();
     }
 }

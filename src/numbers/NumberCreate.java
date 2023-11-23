@@ -19,7 +19,6 @@ class NumberCreate {
     private void createNumbers() {
         long maxLoop = secondNumber == 0 ? firstNumber + 1 : firstNumber + secondNumber;
 
-//        System.out.println(properties.toString());
         if (!properties.isEmpty()) {
             createNumbersWithProperty();
         } else {
@@ -38,16 +37,20 @@ class NumberCreate {
 
     private void createNumbersWithProperty() {
         int i = 0;
-        String prop = properties.get(0).toLowerCase();
-        Number number;
         while (i < secondNumber) {
-            number = new Number(firstNumber++);
+            int found = 0;
+            Number number = new Number(firstNumber++);
             number.makeChecks();
-            if (!checkProp(number, prop)) {
-                continue;
+
+            for (String property: properties) {
+                if (checkProp(number, property)) {
+                    found ++;
+                }
             }
-            number.printDiff();
-            i++;
+            if (properties.size() == found) {
+                number.printDiff();
+                i++;
+            }
         }
     }
 
@@ -67,6 +70,10 @@ class NumberCreate {
                 return number.isPalindrome();
             case "gapful":
                 return number.isGapful();
+            case "square":
+                return number.isSquare();
+            case "sunny":
+                return number.isSunny();
             default:
                 return false;
         }

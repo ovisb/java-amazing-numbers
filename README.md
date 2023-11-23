@@ -53,6 +53,9 @@ To add...
   - if property inputs have mutual exclusivity, abort the request and warn the user
   - e.g input `9 3 odd even` will fail as `odd and even` are exclusive properties
 - Now program will warn the user when multiple incorrect properties are being entered.
+- Added new methods for checking if number is square and sunny
+- User is now able to input multiple properties. 
+  - If so, program will find and return the numbers which match all the properties, in the give range.
 
 ## Project status
 

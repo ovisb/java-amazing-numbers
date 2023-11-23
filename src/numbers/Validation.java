@@ -40,7 +40,6 @@ class Validation {
     }
 
     static void validateProperty(ArrayList<String> inputProperties) throws InputMismatchException {
-        // [even, odd] / [spy, duck] / [sunny, square]
         ArrayList<String> wrongProperties = new ArrayList<>();
 
         for (String property: inputProperties) {
