@@ -55,27 +55,18 @@ class NumberCreate {
     }
 
     private boolean checkProp(Number number, String prop) {
-        switch (prop) {
-            case "odd":
-                return number.isOdd();
-            case "even":
-                return number.isEven();
-            case "spy":
-                return number.isSpy();
-            case "duck":
-                return number.isDuck();
-            case "buzz":
-                return number.isBuzz();
-            case "palindromic":
-                return number.isPalindrome();
-            case "gapful":
-                return number.isGapful();
-            case "square":
-                return number.isSquare();
-            case "sunny":
-                return number.isSunny();
-            default:
-                return false;
-        }
+        return switch (prop) {
+            case "odd" -> number.isOdd();
+            case "even" -> number.isEven();
+            case "spy" -> number.isSpy();
+            case "duck" -> number.isDuck();
+            case "buzz" -> number.isBuzz();
+            case "palindromic" -> number.isPalindrome();
+            case "gapful" -> number.isGapful();
+            case "square" -> number.isSquare();
+            case "sunny" -> number.isSunny();
+            case "jumping" -> number.isJumping();
+            default -> false;
+        };
     }
 }

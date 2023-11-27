@@ -56,7 +56,13 @@ To add...
 - Added new methods for checking if number is square and sunny
 - User is now able to input multiple properties. 
   - If so, program will find and return the numbers which match all the properties, in the give range.
+- Completed stage 6
+
+27.11.2023
+- Adding method for checking if number is `Jumping`
+-  Simple stage, there was another requirement to allow multiple properties in the input, which I solved in the previous stage.
+- Completed stage 7
 
 ## Project status
 
-Completed 5/8 stages
+Completed 7/8 stages

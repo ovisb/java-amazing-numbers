@@ -12,10 +12,11 @@ class Number {
 
     private boolean sunny;
 
-    private long firstNumber;
+    private boolean jumping;
+
+    private final long firstNumber;
 
     Number(long firstNumber) {
-
         this.firstNumber = firstNumber;
     }
 
@@ -47,7 +48,12 @@ class Number {
 
     public boolean isSquare() {return square; }
 
-    public boolean isSunny() {return sunny;}
+    public boolean isSunny() {return sunny; }
+    public boolean isJumping() { return jumping; }
+
+    private int getNumLength() {
+        return String.valueOf(firstNumber).length();
+    }
 
     public void printDiff() {
         StringBuilder str = new StringBuilder();
@@ -81,6 +87,9 @@ class Number {
         if (sunny) {
             str.append(" sunny");
         }
+        if (jumping) {
+            str.append(" jumping");
+        }
         System.out.println(str);
     }
 
@@ -97,6 +106,7 @@ class Number {
                         spy: %b
                         square: %b
                         sunny: %b
+                        jumping: %b
                 """,
                 this.firstNumber,
                 this.even,
@@ -107,7 +117,8 @@ class Number {
                 this.gapful,
                 this.spy,
                 this.square,
-                this.sunny
+                this.sunny,
+                this.jumping
                 );
     }
 
@@ -208,6 +219,29 @@ class Number {
         }
     }
 
+    private void checkJumping() {
+        String strNum = String.valueOf(firstNumber);
+
+        if (getNumLength() == 1) {
+            jumping = true;
+            return;
+        }
+
+        for (int i = 1; i < strNum.length(); i++) {
+            int currentDigit = Character.getNumericValue(strNum.charAt(i));
+            int previousDigit = Character.getNumericValue(strNum.charAt(i - 1));
+            int difference = Math.abs(currentDigit - previousDigit);
+
+            if (difference != 1) {
+                jumping = false;
+                return;
+            }
+        }
+
+        jumping = true;
+
+    }
+
     public void makeChecks() {
         checkOddEven();
         checkIfBuzz();
@@ -217,5 +251,6 @@ class Number {
         checkSpy();
         checkSquare();
         checkSunny();
+        checkJumping();
     }
 }

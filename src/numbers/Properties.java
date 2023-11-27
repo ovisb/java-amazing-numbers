@@ -9,7 +9,8 @@ enum Properties {
     GAPFUL(""),
     SPY("duck"),
     SUNNY("square"),
-    SQUARE("sunny");
+    SQUARE("sunny"),
+    JUMPING("jumping");
 
     final String exclusivity;
 
