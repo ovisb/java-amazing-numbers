@@ -50,7 +50,8 @@ class Validation {
             }
         }
 
-        if (!checkWrongProperties(wrongProperties)){
+        if (!wrongProperties.isEmpty() && !checkWrongProperties(wrongProperties)) {
+            System.out.printf("Available properties: %s%n", Arrays.toString(Properties.values()));
             throw new InputMismatchException();
         }
 
@@ -70,19 +71,19 @@ class Validation {
     }
 
     static boolean checkWrongProperties(ArrayList<String> wrongProperties) {
-        if (!wrongProperties.isEmpty()){
-            if (wrongProperties.size() > 1) {
-                System.out.printf("The properties [%s] are wrong.%n", String.join(", ", wrongProperties));
-
-            } else {
-                System.out.printf("The property [%s] is wrong.%n", wrongProperties.get(0));
-            }
-            System.out.printf("Available properties: %s%n", Arrays.toString(Properties.values()));
+        if (wrongProperties.size() > 1) {
+            System.out.printf("The properties [%s] are wrong.%n", String.join(", ", wrongProperties));
+            return false;
+        } else if (wrongProperties.size() == 1){
+            System.out.printf("The property [%s] is wrong.%n", wrongProperties.get(0));
             return false;
         }
+
         return true;
     }
 
+
+    //
     static boolean checkPropertyExclusivity(ArrayList<String> inputProperties) {
         ArrayList<String> exclusiveProps = new ArrayList<>();
 
@@ -91,8 +92,11 @@ class Validation {
         outer: for (String propI: inputProperties) {
             for (String propJ: inputProperties) {
 
+                if (propI.equals(propJ)) {
+                    continue;
+                }
                 // check property exclusivity
-                if (!propI.equals(propJ) && propI.equals(Properties.valueOf(propJ.toUpperCase()).exclusivity)) {
+                if (propI.equals(Properties.valueOf(propJ.toUpperCase()).exclusivity)) {
                     exclusiveProps.add(propI.toUpperCase());
                     ++count;
                 }
