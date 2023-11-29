@@ -63,6 +63,11 @@ To add...
 -  Simple stage, there was another requirement to allow multiple properties in the input, which I solved in the previous stage.
 - Completed stage 7
 
+29.11.2023
+- refactor mutual exclusivity checking to adapt to new requirements
+  - now both `ODD EVEN` `-ODD -EVEN` will get skipped
+  - also direct opposites will get skipped, e.g `property -property`
+
 ## Project status
 
 Completed 7/8 stages

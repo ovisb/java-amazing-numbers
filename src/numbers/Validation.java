@@ -39,12 +39,22 @@ class Validation {
         }
     }
 
+    static String replaceDash(String property) {
+        return property.replace("-", "");
+    }
+
     static void validateProperty(ArrayList<String> inputProperties) throws InputMismatchException {
         ArrayList<String> wrongProperties = new ArrayList<>();
 
         for (String property: inputProperties) {
             try {
-                Properties prop = Properties.valueOf(property.toUpperCase());
+
+                // placeholder
+                if (property.charAt(0) == '-') {
+                    property = replaceDash(property);
+                }
+
+                Properties.valueOf(property.toUpperCase());
             } catch (IllegalArgumentException e) {
                 wrongProperties.add(property.toUpperCase());
             }
@@ -55,19 +65,16 @@ class Validation {
             throw new InputMismatchException();
         }
 
+//        ArrayList<Properties> propertiesObjects = createPropertyObjects(inputProperties);
+
         if (!checkPropertyExclusivity(inputProperties)) {
             throw new InputMismatchException();
         }
     }
 
     static ArrayList<String> getUserProperties(String[] request) {
-        ArrayList<String> inputProperties = new ArrayList<>();
 
-        for (int i = 2; i < request.length; i++) {
-            inputProperties.add(request[i]);
-        }
-
-        return  inputProperties;
+        return new ArrayList<>(Arrays.asList(request).subList(2, request.length));
     }
 
     static boolean checkWrongProperties(ArrayList<String> wrongProperties) {
@@ -89,21 +96,65 @@ class Validation {
 
         int count = 0;
 
-        outer: for (String propI: inputProperties) {
-            for (String propJ: inputProperties) {
-
-                if (propI.equals(propJ)) {
+        outer: for (int i = 0; i < inputProperties.size(); i++) {
+            String propI = inputProperties.get(i);
+            for (int j = 0; j < inputProperties.size(); j++) {
+                if (i == j) {
                     continue;
                 }
-                // check property exclusivity
-                if (propI.equals(Properties.valueOf(propJ.toUpperCase()).exclusivity)) {
-                    exclusiveProps.add(propI.toUpperCase());
-                    ++count;
-                }
-                if (count == 2) {
-                    break outer;
+
+                String propJ = inputProperties.get(j);
+
+                // if both inputs start with sign
+                if (propI.startsWith("-") && propJ.startsWith("-")) {
+                    propI = propI.replace("-", "");
+                    propJ = propJ.replace("-", "");
+
+                    Properties propertyIEnum = Properties.valueOf(propI.toUpperCase());
+
+                    // -SQUARE -SUNNY is allowed, so skip
+                    if (propI.equalsIgnoreCase("square") && propJ.equalsIgnoreCase("sunny") ||
+                            propI.equalsIgnoreCase("sunny") && propJ.equalsIgnoreCase("square")) {
+                        break outer;
+                    }
+
+                    // if they are exclusive, add their names with sign
+                    if (propertyIEnum.exclusivity.equalsIgnoreCase(propJ)) {
+                        System.out.printf("-%s", propI.toUpperCase());
+                        exclusiveProps.add(String.format("-%s", propI.toUpperCase()));
+                        exclusiveProps.add(String.format("-%s", propJ.toUpperCase()));
+                        break outer;
+                    }
                 }
 
+                // if any of the inputs have a sign
+                // check if inputs match, ODD, -ODD
+                if (propI.startsWith("-") || propJ.startsWith("-")) {
+                    String propIReplace = propI.replace("-", "");
+                    String propJReplace = propJ.replace("-", "");
+
+                    // if match, break
+                    if (propIReplace.equalsIgnoreCase(propJReplace)) {
+                        exclusiveProps.add(propI.toUpperCase());
+                        exclusiveProps.add(propJ.toUpperCase());
+                        break outer;
+                    }
+                }
+
+
+                // only check exclusivity for inputs without a sign
+                if (!propI.startsWith("-") && !propJ.startsWith("-")) {
+                    Properties propIEnum = Properties.valueOf(propI.toUpperCase());
+                    Properties propJEnum = Properties.valueOf(propJ.toUpperCase());
+                    if (propIEnum.name().toLowerCase().equals(propJEnum.exclusivity)) {
+                        exclusiveProps.add(propIEnum.name());
+                        ++count;
+                    }
+
+                    if (count == 2) {
+                        break outer;
+                    }
+                }
             }
         }
 

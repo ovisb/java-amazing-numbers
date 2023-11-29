@@ -10,7 +10,9 @@ enum Properties {
     SPY("duck"),
     SUNNY("square"),
     SQUARE("sunny"),
-    JUMPING("jumping");
+    JUMPING("jumping"),
+    HAPPY("sad"),
+    SAD("happy");
 
     final String exclusivity;
 
