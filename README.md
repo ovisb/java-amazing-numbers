@@ -68,6 +68,8 @@ To add...
   - now both `ODD EVEN` `-ODD -EVEN` will get skipped
   - also direct opposites will get skipped, e.g `property -property`
 
+04.12.2023
+- added method for checking if number is happy or sad
 ## Project status
 
 Completed 7/8 stages

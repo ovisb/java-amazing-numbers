@@ -20,6 +20,7 @@ class NumberCreate {
         long maxLoop = secondNumber == 0 ? firstNumber + 1 : firstNumber + secondNumber;
 
         if (!properties.isEmpty()) {
+            System.out.println(properties);
             createNumbersWithProperty();
         } else {
             for (long num = firstNumber; num < maxLoop ; num++) {
@@ -66,6 +67,8 @@ class NumberCreate {
             case "square" -> number.isSquare();
             case "sunny" -> number.isSunny();
             case "jumping" -> number.isJumping();
+            case "happy" -> number.isHappy();
+            case "sad" -> number.isSad();
             default -> false;
         };
     }

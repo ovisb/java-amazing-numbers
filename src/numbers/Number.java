@@ -1,18 +1,22 @@
 package numbers;
 class Number {
 
-    private boolean odd;
-    private boolean even;
-    private boolean buzz;
-    private boolean duck;
-    private boolean palindrome;
-    private boolean gapful;
-    private boolean spy;
-    private boolean square;
+    private boolean odd = false;
+    private boolean even = false;
+    private boolean buzz = false;
+    private boolean duck = false;
+    private boolean palindrome = false;
+    private boolean gapful = false;
+    private boolean spy = false;
+    private boolean square = false;
 
-    private boolean sunny;
+    private boolean sunny = false;
 
-    private boolean jumping;
+    private boolean jumping = false;
+
+    private boolean sad = false;
+
+    private boolean happy = false;
 
     private final long firstNumber;
 
@@ -50,6 +54,8 @@ class Number {
 
     public boolean isSunny() {return sunny; }
     public boolean isJumping() { return jumping; }
+    public boolean isHappy() { return happy; }
+    public boolean isSad() { return sad; }
 
     private int getNumLength() {
         return String.valueOf(firstNumber).length();
@@ -87,8 +93,11 @@ class Number {
         if (sunny) {
             str.append(" sunny");
         }
-        if (jumping) {
-            str.append(" jumping");
+        if (happy) {
+            str.append(" happy");
+        }
+        if (sad) {
+            str.append(" sad");
         }
         System.out.println(str);
     }
@@ -107,6 +116,8 @@ class Number {
                         square: %b
                         sunny: %b
                         jumping: %b
+                        happy: %b
+                        sad: %b
                 """,
                 this.firstNumber,
                 this.even,
@@ -118,7 +129,9 @@ class Number {
                 this.spy,
                 this.square,
                 this.sunny,
-                this.jumping
+                this.jumping,
+                this.happy,
+                this.sad
                 );
     }
 
@@ -242,6 +255,40 @@ class Number {
 
     }
 
+    private long getTotalDigits(long number) {
+        long higher_num = number;
+        long total = 0;
+        while (higher_num >= 1) {
+            long last_digit = higher_num % 10;
+            total += last_digit * last_digit;
+            higher_num /= 10;
+        }
+        return total;
+    }
+
+    private boolean setHappySad(long number) {
+        if (number == 1) {
+            this.happy = true;
+        } else if(number == 4) {
+            this.sad = true;
+        }
+        return this.sad || this.happy;
+    }
+
+    private void checkHappySad() {
+        long number = this.firstNumber;
+        while (true) {
+            if (number / 10 == 0) {
+                number *= number;
+            } else {
+                number = getTotalDigits(number);
+            }
+            if (setHappySad(number)) {
+                break;
+            }
+        }
+    }
+
     public void makeChecks() {
         checkOddEven();
         checkIfBuzz();
@@ -252,5 +299,6 @@ class Number {
         checkSquare();
         checkSunny();
         checkJumping();
+        checkHappySad();
     }
 }
