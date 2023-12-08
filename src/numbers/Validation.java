@@ -13,8 +13,8 @@ class Validation {
             long firstNumber = Long.parseLong(request[0]);
             isNatural(firstNumber);
         } catch (Exception e) {
-            System.out.println("The first parameter should be a natural number or zero");
-            throw new Exception();
+//            System.out.println("The first parameter should be a natural number or zero");
+            throw new Exception("The first parameter should be a natural number or zero");
         }
 
         if (request.length == 2) {
@@ -22,8 +22,7 @@ class Validation {
                 long secondNumber = Long.parseLong(request[1]);
                 isNatural(secondNumber);
             } catch (Exception e) {
-                System.out.println("The second parameter should be a natural number or zero");
-                throw new Exception();
+                throw new Exception("The second parameter should be a natural number or zero");
             }
         }
 
@@ -43,7 +42,7 @@ class Validation {
         return property.replace("-", "");
     }
 
-    static void validateProperty(ArrayList<String> inputProperties) throws InputMismatchException {
+    static void validateProperty(ArrayList<String> inputProperties) {
         ArrayList<String> wrongProperties = new ArrayList<>();
 
         for (String property: inputProperties) {

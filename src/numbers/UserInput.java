@@ -45,6 +45,7 @@ class UserInput {
             try {
                 Validation.validateInput(this);
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 System.out.println();
                 continue;
             }
@@ -58,6 +59,7 @@ class UserInput {
             try {
                 secondNumber = Long.parseLong(this.request[1]);
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 secondNumber = 0;
             }
 
