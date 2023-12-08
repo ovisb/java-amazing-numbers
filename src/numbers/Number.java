@@ -1,4 +1,7 @@
 package numbers;
+
+import java.util.ArrayList;
+
 class Number {
 
     private boolean odd = false;
@@ -64,6 +67,7 @@ class Number {
     public void printDiff() {
         StringBuilder str = new StringBuilder();
         String message = String.format("%s is", this.firstNumber);
+
         str.append(message);
 
         if (even) {
@@ -93,6 +97,9 @@ class Number {
         if (sunny) {
             str.append(" sunny");
         }
+        if (jumping) {
+            str.append(" jumping");
+        }
         if (happy) {
             str.append(" happy");
         }
@@ -100,6 +107,8 @@ class Number {
             str.append(" sad");
         }
         System.out.println(str);
+
+
     }
 
     @Override

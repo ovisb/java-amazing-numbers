@@ -70,6 +70,12 @@ To add...
 
 04.12.2023
 - added method for checking if number is happy or sad
-## Project status
 
-Completed 7/8 stages
+08.12.2023
+- Now property will be ignored if it's prefix starts with `-`
+  - e.g `-ODD` will return numbers which are not odd
+  - multiple not properties can also be chained
+- Completed stage 8 and project
+
+## Project status
+Completed 8/8 stages
