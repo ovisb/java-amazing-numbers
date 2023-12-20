@@ -13,7 +13,6 @@ class Validation {
             long firstNumber = Long.parseLong(request[0]);
             isNatural(firstNumber);
         } catch (Exception e) {
-//            System.out.println("The first parameter should be a natural number or zero");
             throw new Exception("The first parameter should be a natural number or zero");
         }
 
@@ -63,8 +62,6 @@ class Validation {
             System.out.printf("Available properties: %s%n", Arrays.toString(Properties.values()));
             throw new InputMismatchException();
         }
-
-//        ArrayList<Properties> propertiesObjects = createPropertyObjects(inputProperties);
 
         if (!checkPropertyExclusivity(inputProperties)) {
             throw new InputMismatchException();

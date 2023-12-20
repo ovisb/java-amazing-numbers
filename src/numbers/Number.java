@@ -107,8 +107,6 @@ class Number {
             str.append(" sad");
         }
         System.out.println(str);
-
-
     }
 
     @Override
